@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayat Countdown</title>
+  <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <div class="background">
+    <img class="image"
+      src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/269906926.jpg?k=09696ed89c2acb5400bc2f3d658d00a09cc39c1124ccb9f44a0fe60e0ee10086&o=&hp=1">
+    <div class="centered">
+      <p><span id="days"></span> Tage</p>
+      <p><span id="hours"></span> Stunden</p>
+      <p><span id="minutes"></span> Minuten</p>
+      <p><span id="seconds"></span> Sekunden</p>
+      <p>bis hayat</p>
+    </div>
+  </div>
+
+  <script>
+    setInterval(() => {
+      var timeLeft = getTimeLeft();
+
+      document.getElementById("days").innerHTML = timeLeft.days;
+      document.getElementById("hours").innerHTML = timeLeft.hours;
+      document.getElementById("minutes").innerHTML = timeLeft.minutes;
+      document.getElementById("seconds").innerHTML = timeLeft.seconds;
+    }, 500);
+
+
+    function getTimeLeft() {
+      const now = new Date();
+      const future = new Date(2021, 07, 16, 06, 00, 00, 0);
+
+      var delta = Math.abs(future - now) / 1000;
+
+      // calculate (and subtract) whole days
+      var days = Math.floor(delta / 86400);
+      delta -= days * 86400;
+
+      // calculate (and subtract) whole hours
+      var hours = Math.floor(delta / 3600) % 24;
+      delta -= hours * 3600;
+
+      // calculate (and subtract) whole minutes
+      var minutes = Math.floor(delta / 60) % 60;
+      delta -= minutes * 60;
+
+      // what's left is seconds
+      var seconds = Math.floor(delta % 60);  // in theory the modulus is not required
+
+      return { days, hours, minutes, seconds }
+    }
+  </script>
+</body>
+
+</html>
