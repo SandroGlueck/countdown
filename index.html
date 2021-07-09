@@ -12,8 +12,7 @@
 
 <body>
   <div class="background">
-    <img class="image"
-      src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/269906926.jpg?k=09696ed89c2acb5400bc2f3d658d00a09cc39c1124ccb9f44a0fe60e0ee10086&o=&hp=1">
+    <img class="image" id="image" src="https://feelcroatia.hr/wp-content/uploads/2020/10/villa-maluja-1-1350x900.jpg">
     <div class="centered">
       <p><span id="days"></span> Tage</p>
       <p><span id="hours"></span> Stunden</p>
@@ -24,6 +23,22 @@
   </div>
 
   <script>
+
+    const broken = [38, 48, 49];
+
+    setInterval(() => {
+
+      var random = -1;
+
+      do {
+        random = Math.floor(Math.random() * 48);
+      } while (broken.some(b => b === random))
+
+      document.getElementById("image").src = `https://feelcroatia.hr/wp-content/uploads/2020/10/villa-maluja-${random}-1350x900.jpg`
+    }, 5000);
+
+
+
     setInterval(() => {
       var timeLeft = getTimeLeft();
 
