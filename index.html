@@ -1,81 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hayat Countdown</title>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hayat Countdown</title>
-  <link rel="stylesheet" href="node_modules/normalize.css/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-
-<body>
-  <div class="background">
-    <img class="image" id="image" src="https://feelcroatia.hr/wp-content/uploads/2020/10/villa-maluja-1-1350x900.jpg">
-    <div class="centered">
-      <div class="text-container">
-        <p><span id="days"></span> Tage</p>
-        <p><span id="hours"></span> Stunden</p>
-        <p><span id="minutes"></span> Minuten</p>
-        <p><span id="seconds"></span> Sekunden</p>
-        <p>bis hayat</p>
+  <body>
+    <div class="background">
+      <img
+        class="image"
+        id="image"
+        src="https://cf.bstatic.com/images/hotel/max1280x900/313/313012186.jpg"
+      />
+      <div class="centered">
+        <div class="text-container">
+          <p><span id="days"></span> Tage</p>
+          <p><span id="hours"></span> Stunden</p>
+          <p><span id="minutes"></span> Minuten</p>
+          <p><span id="seconds"></span> Sekunden</p>
+          <p>bis hayat</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <script>
+    <script>
+      const images = [
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012186.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650166.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012184.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012152.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650245.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216649082.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651099.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651110.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651108.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651095.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012122.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012229.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651134.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651125.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012180.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651031.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651022.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012196.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650155.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650236.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650236.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651114.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216653098.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216653115.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650996.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216650179.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216653120.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216653093.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216651145.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012134.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/274/274479460.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/216/216653110.jpg",
+        "https://cf.bstatic.com/images/hotel/max1280x900/313/313012154.jpg",
+      ];
 
-    const broken = [38, 39, 44, 48, 49];
+      setInterval(() => {
+        const random = Math.floor(Math.random() * images.length) + 1;
 
-    setInterval(() => {
+        document.getElementById("image").src = images[random];
+      }, 5000);
 
-      var random = -1;
+      setInterval(() => {
+        var timeLeft = getTimeLeft();
 
-      do {
-        random = Math.floor(Math.random() * 48) + 1;
-      } while (broken.some(b => b === random))
+        document.getElementById("days").innerHTML = timeLeft.days;
+        document.getElementById("hours").innerHTML = timeLeft.hours;
+        document.getElementById("minutes").innerHTML = timeLeft.minutes;
+        document.getElementById("seconds").innerHTML = timeLeft.seconds;
+      }, 500);
 
-      document.getElementById("image").src = `https://feelcroatia.hr/wp-content/uploads/2020/10/villa-maluja-${random}-1350x900.jpg`
-    }, 5000);
+      function getTimeLeft() {
+        const now = new Date();
+        const future = new Date(2022, 06, 10, 06, 00, 00, 0);
 
+        var delta = Math.abs(future - now) / 1000;
 
+        // calculate (and subtract) whole days
+        var days = Math.floor(delta / 86400);
+        delta -= days * 86400;
 
+        // calculate (and subtract) whole hours
+        var hours = Math.floor(delta / 3600) % 24;
+        delta -= hours * 3600;
 
-    setInterval(() => {
-      var timeLeft = getTimeLeft();
+        // calculate (and subtract) whole minutes
+        var minutes = Math.floor(delta / 60) % 60;
+        delta -= minutes * 60;
 
-      document.getElementById("days").innerHTML = timeLeft.days;
-      document.getElementById("hours").innerHTML = timeLeft.hours;
-      document.getElementById("minutes").innerHTML = timeLeft.minutes;
-      document.getElementById("seconds").innerHTML = timeLeft.seconds;
-    }, 500);
+        // what's left is seconds
+        var seconds = Math.floor(delta % 60); // in theory the modulus is not required
 
-
-    function getTimeLeft() {
-      const now = new Date();
-      const future = new Date(2021, 07, 16, 06, 00, 00, 0);
-
-      var delta = Math.abs(future - now) / 1000;
-
-      // calculate (and subtract) whole days
-      var days = Math.floor(delta / 86400);
-      delta -= days * 86400;
-
-      // calculate (and subtract) whole hours
-      var hours = Math.floor(delta / 3600) % 24;
-      delta -= hours * 3600;
-
-      // calculate (and subtract) whole minutes
-      var minutes = Math.floor(delta / 60) % 60;
-      delta -= minutes * 60;
-
-      // what's left is seconds
-      var seconds = Math.floor(delta % 60);  // in theory the modulus is not required
-
-      return { days, hours, minutes, seconds }
-    }
-  </script>
-</body>
-
+        return { days, hours, minutes, seconds };
+      }
+    </script>
+  </body>
 </html>
